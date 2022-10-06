@@ -81,8 +81,7 @@ _This community library is not an official product or project of Datadog. Mainta
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `datadog_http` to your list of dependencies in `mix.exs`:
+Add to your dependencies in `mix.exs`. The hex specification is required.
 
 ```elixir
 def deps do
