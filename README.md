@@ -25,6 +25,10 @@ _This community library is not an official product or project of Datadog. Mainta
 - [ ] Downtimes
 - [ ] Embeddable Graphs
 - [ ] Events
+  - [ ] Get a list of events
+  - [x] Post an event
+  - [ ] Get an event
+  - [ ] Search events
 - [ ] GCP Integration
 - [ ] Hosts
 - [ ] Incident Services

@@ -37,6 +37,7 @@ defmodule DatadogHttp.MixProject do
       {:tesla, "~> 1.4"},
       {:hackney, "~> 1.18"},
       {:jason, "~> 1.4"},
+      {:exconstructor, "~> 1.2"},
       {:ex_doc, "~> 0.23", only: :dev, runtime: false},
       {:bypass, "~> 2.1", only: :test},
       {:excoveralls, "~> 0.15", only: :test}
