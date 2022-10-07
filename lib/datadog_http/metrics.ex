@@ -42,14 +42,21 @@ defmodule DatadogHttp.Metrics do
     Datadog metric point data structure.
     """
 
-    @derive Jason.Encoder
     defstruct timestamp: nil,
               value: nil
 
     @type t :: %__MODULE__{
-            timestamp: integer(),
+            timestamp: integer() | DateTime,
             value: float()
           }
+
+    defimpl Jason.Encoder, for: __MODULE__ do
+      def encode(%{timestamp: %DateTime{} = timestamp} = value, opts) do
+        Jason.Encode.map(%{value | timestamp: DateTime.to_unix(timestamp)}, opts)
+      end
+
+      def encode(value, opts), do: Jason.Encode.map(value, opts)
+    end
   end
 
   defmodule Resource do
