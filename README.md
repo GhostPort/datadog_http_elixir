@@ -5,6 +5,7 @@
 [![Total Download](https://img.shields.io/hexpm/dt/datadog_http.svg)](https://hex.pm/packages/datadog_http)
 [![License](https://img.shields.io/hexpm/l/datadog_http.svg)](https://github.com/GhostPort/datadog_http_elixir/blob/master/LICENSE)
 [![Last Updated](https://img.shields.io/github/last-commit/GhostPort/datadog_http_elixir.svg)](https://github.com/GhostPort/datadog_http_elixir/commits/master)
+[![Coverage Status](https://coveralls.io/repos/github/GhostPort/datadog_http_elixir/badge.svg?branch=master)](https://coveralls.io/github/GhostPort/datadog_http_elixir?branch=master)
 
 A client for Datadog's HTTP API, useful for building integrations.
 
