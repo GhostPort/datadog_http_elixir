@@ -52,10 +52,14 @@ defmodule DatadogHttp.Metrics do
 
     defimpl Jason.Encoder, for: __MODULE__ do
       def encode(%{timestamp: %DateTime{} = timestamp} = value, opts) do
-        Jason.Encode.map(%{value | timestamp: DateTime.to_unix(timestamp)}, opts)
+        __MODULE__.encode(%{value | timestamp: DateTime.to_unix(timestamp)}, opts)
       end
 
-      def encode(value, opts), do: Jason.Encode.map(value, opts)
+      def encode(value, opts) do
+        value
+        |> Map.delete(:__struct__)
+        |> Jason.Encode.map(opts)
+      end
     end
   end
 
