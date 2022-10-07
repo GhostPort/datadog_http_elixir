@@ -11,10 +11,8 @@ permissions:
 
 jobs:
   build:
-
     name: Build and test
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
     - name: Set up Elixir
@@ -22,13 +20,29 @@ jobs:
       with:
         elixir-version: '1.14.0'
         otp-version: '25.1.1'
+
     - name: Restore dependencies cache
       uses: actions/cache@v3
       with:
         path: deps
         key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
         restore-keys: ${{ runner.os }}-mix-
-    - name: Install dependencies
-      run: mix deps.get
+
+    - name: Restore build cache
+      uses: actions/cache@v2
+      with:
+        path: _build/test/
+        key: build-${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
+        restore-keys: build-${{ runner.os }}-mix-
+
+    - name: Install Dependencies
+      run: |
+        mix local.rebar --force
+        mix local.hex --force
+        mix deps.get
+        mix compile
+
     - name: Run tests
-      run: mix test
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: mix coveralls.github

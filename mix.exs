@@ -13,7 +13,7 @@ defmodule DatadogHttp.MixProject do
       package: package(),
       deps: deps(),
       test_coverage: [tool: ExCoveralls],
-      preferred_cli_env: [coveralls: :test, "coveralls.detail": :test],
+      preferred_cli_env: [coveralls: :test, "coveralls.html": :test, "coveralls.github": :test],
       name: "Datadog HTTP",
       source_url: "https://github.com/GhostPort/datadog_http_elixir"
     ]
@@ -38,7 +38,8 @@ defmodule DatadogHttp.MixProject do
       {:hackney, "~> 1.18"},
       {:jason, "~> 1.4"},
       {:ex_doc, "~> 0.23", only: :dev, runtime: false},
-      {:bypass, "~> 2.1", only: :test}
+      {:bypass, "~> 2.1", only: :test},
+      {:excoveralls, "~> 0.15", only: :test}
     ]
   end
 
