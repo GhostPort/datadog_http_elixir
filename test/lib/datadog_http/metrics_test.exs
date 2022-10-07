@@ -127,5 +127,21 @@ defmodule DatadogHttp.MetricsTest do
 
       assert {:error, ["Bad Request"]} = Metrics.submit([], config)
     end
+
+    test "error" do
+      config = %{api_key: "some_key", base_url: "nope"}
+
+      assert {:error, :nxdomain} = Metrics.submit([], config)
+    end
+
+    test "malformed_response", %{bypass: bypass, config: config} do
+      Bypass.expect(bypass, "POST", "/api/v2/series", fn conn ->
+        conn
+        |> Plug.Conn.put_resp_header("Content-Type", "application/json")
+        |> Plug.Conn.resp(200, Jason.encode!(%{bad: "response"}))
+      end)
+
+      assert :error = Metrics.submit([], config)
+    end
   end
 end
